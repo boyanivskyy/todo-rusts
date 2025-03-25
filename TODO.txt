@@ -1,8 +1,16 @@
-TODO: Brash teeth 
-TODO: Drink coffee 
-TODO: Have a breakfest
-TODO: Drink a tea
-TODO: Sleep well
-TODO: Finish Todo Application
-TODO: Buy bread
-TODO: 59
+TODO: 49
+TODO: 50
+TODO: 51
+TODO: 49
+TODO: 50
+TODO: 51
+TODO: 49
+TODO: 50
+TODO: 51
+TODO: 49
+TODO: 50
+TODO: 51
+DONE: Brash teeth 
+DONE: Drink coffee 
+DONE: Have a breakfest
+DONE: Drink a tea

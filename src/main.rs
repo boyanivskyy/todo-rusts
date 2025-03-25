@@ -1,18 +1,18 @@
 use std::env::args;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Write};
+use std::io::{BufRead, BufReader};
 use std::process;
 
 use ncurses::*;
 
 mod constants;
+mod handler;
 mod models;
 mod ui;
-mod utils;
 
+use handler::{list_down, list_transfer, list_up, parse_item, remove_item, save_state};
 use models::Status;
 use ui::UI;
-use utils::{list_down, list_transfer, list_up, parse_item, save_state};
 
 fn main() {
     let mut args = args();
@@ -98,17 +98,11 @@ fn main() {
 
         match key as u8 as char {
             'q' => quit = true,
-            'e' => {
-                let mut file = File::create("TODO.txt").unwrap();
-
-                for todo in todos.iter() {
-                    writeln!(file, "TODO: {}", todo).unwrap();
-                }
-
-                for done in dones.iter() {
-                    writeln!(file, "DONE: {}", done).unwrap();
-                }
-            }
+            's' => save_state(&todos, &dones, &file_path),
+            'd' => match tab {
+                Status::Todo => remove_item(&mut todos, &mut todo_curr),
+                Status::Done => remove_item(&mut dones, &mut done_curr),
+            },
             'k' => match tab {
                 Status::Todo => list_up(&mut todo_curr),
                 Status::Done => list_up(&mut done_curr),
@@ -126,7 +120,6 @@ fn main() {
             }
             _ => {
                 todos.push(format!("{}", key));
-                // println!("{}", key as u8 as char)
             }
         }
     }

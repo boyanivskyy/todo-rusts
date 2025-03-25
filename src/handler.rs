@@ -26,6 +26,15 @@ pub fn list_down(list: &Vec<String>, list_curr: &mut usize) {
     *list_curr = min(*list_curr + 1, list.len() - 1);
 }
 
+pub fn remove_item(list: &mut Vec<String>, list_curr: &mut usize) {
+    if list.len() != 0 {
+        list.remove(*list_curr);
+        if list.len() > 0 && *list_curr >= list.len() {
+            *list_curr -= 1;
+        }
+    }
+}
+
 pub fn list_transfer(
     list_dest: &mut Vec<String>,
     list_src: &mut Vec<String>,
